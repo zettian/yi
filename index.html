@@ -1921,6 +1921,36 @@
     border-left-color: #6a1b9a;
 }
 .cultural-disclaimer .disclaimer-title { color: #6a1b9a; }
+
+        /* 语言切换 */
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
+            background: rgba(201,169,98,0.1);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(201,169,98,0.3);
+            font-size: 12px;
+        }
+        .lang-switch-btn {
+            padding: 3px 10px;
+            cursor: pointer;
+            color: var(--text-gold);
+            background: transparent;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+            line-height: 1.2;
+        }
+        .lang-switch-btn.active {
+            background: linear-gradient(135deg, var(--primary-gold), #D4AF37);
+            color: #1a1a2e;
+        }
+        .lang-switch-btn:hover:not(.active) {
+            background: rgba(201,169,98,0.15);
+        }
 </style>
 </head>
 <body>
@@ -1929,15 +1959,21 @@
         <!-- 顶部标题 -->
         <div class="header">
             <div class="logo">☰</div>
-            <div class="subtitle">择 天 易</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+                <div class="subtitle" data-i18n="appTitle">择 天 易</div>
+                <div class="lang-switch">
+                    <button class="lang-switch-btn active" id="langZh" onclick="setLanguage('zh')">中文</button>
+                    <button class="lang-switch-btn" id="langEn" onclick="setLanguage('en')">EN</button>
+                </div>
+            </div>
         </div>
         
         <!-- 主导航 -->
         <div class="nav-tabs">
-            <div class="nav-tab active" data-tab="divination">起卦</div>
-            <div class="nav-tab" data-tab="history">历史</div>
-            <div class="nav-tab" data-tab="learn">学习</div>
-            <div class="nav-tab" data-tab="version">版本</div>
+            <div class="nav-tab active" data-tab="divination" data-i18n="navDivination">起卦</div>
+            <div class="nav-tab" data-tab="history" data-i18n="navHistory">历史</div>
+            <div class="nav-tab" data-tab="learn" data-i18n="navLearn">学习</div>
+            <div class="nav-tab" data-tab="version" data-i18n="navVersion">版本</div>
         </div>
         
         <!-- 内容区域 -->
@@ -1945,43 +1981,43 @@
             <!-- 起卦页面 -->
             <div class="section active" id="divination-section">
                 <div class="divination-intro">
-                    <h3>✦ 缘起 ✦</h3>
-                    <p>易经之道，藏乎阴阳变易之中<br>心诚则灵，一念之间，卦象自现</p>
+                    <h3 data-i18n="divinationIntroTitle">✦ 缘起 ✦</h3>
+                    <p data-i18n="divinationIntroDesc">易经之道，藏乎阴阳变易之中<br>心诚则灵，一念之间，卦象自现</p>
                 </div>
                 
-                <h4 style="color: var(--text-gold); margin-bottom: 15px; font-size: 15px;">选择起卦方式</h4>
+                <h4 style="color: var(--text-gold); margin-bottom: 15px; font-size: 15px;" data-i18n="selectMethod">选择起卦方式</h4>
                 
                 <div class="method-grid">
                     <div class="method-card selected" onclick="selectMethod('coin')">
                         <div class="method-icon">🪙</div>
-                        <h4>金钱卦</h4>
-                        <p>三枚铜钱摇六次<br>传统六爻占卜法</p>
+                        <h4 data-i18n="methodCoin">金钱卦</h4>
+                        <p data-i18n="methodCoinDesc">三枚铜钱摇六次<br>传统六爻占卜法</p>
                     </div>
                     <div class="method-card" onclick="selectMethod('yao')">
                         <div class="method-icon">📊</div>
-                        <h4>报数起卦</h4>
-                        <p>默念问题报三个数<br>快速起卦</p>
+                        <h4 data-i18n="methodNumber">报数起卦</h4>
+                        <p data-i18n="methodNumberDesc">默念问题报三个数<br>快速起卦</p>
                     </div>
                     <div class="method-card" onclick="selectMethod('time')">
                         <div class="method-icon">⏰</div>
-                        <h4>时间起卦</h4>
-                        <p>根据当前时间<br>自动起卦</p>
+                        <h4 data-i18n="methodTime">时间起卦</h4>
+                        <p data-i18n="methodTimeDesc">根据当前时间<br>自动起卦</p>
                     </div>
                     <div class="method-card" onclick="selectMethod('random')">
                         <div class="method-icon">✨</div>
-                        <h4>随心卦</h4>
-                        <p>念头一动即成卦<br>直觉占卜</p>
+                        <h4 data-i18n="methodRandom">随心卦</h4>
+                        <p data-i18n="methodRandomDesc">念头一动即成卦<br>直觉占卜</p>
                     </div>
                 </div>
                 
                 <div class="question-section">
-                    <h4>📝 请描述您想问的事情</h4>
-                    <textarea class="question-input" id="questionInput" placeholder="例如：明日出行是否顺利？&#10;      最近工作运势如何？"></textarea>
+                    <h4 data-i18n="questionTitle">📝 请描述您想问的事情</h4>
+                    <textarea class="question-input" id="questionInput" placeholder="例如：明日出行是否顺利？&#10;      最近工作运势如何？" data-i18n-placeholder="questionPlaceholder"></textarea>
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
-                        <span style="font-size: 12px; color: #888;">免费版 · 今日剩余：<span id="usageCountDisplay" style="color: var(--text-gold); font-weight: bold;">1</span> 次</span>
-                        <a href="https://zetian.i-ching-ai.com" target="_blank" style="font-size: 11px; color: #d4a853; text-decoration: none;">获取完整版 → 官网</a>
+                        <span style="font-size: 12px; color: #888;" data-i18n="freeRemainToday">免费版 · 今日剩余：<span id="usageCountDisplay" style="color: var(--text-gold); font-weight: bold;">1</span><span data-i18n="timesSuffix"> 次</span></span>
+                        <a href="https://zetian.i-ching-ai.com" target="_blank" style="font-size: 11px; color: #d4a853; text-decoration: none;" data-i18n="getFullVersionLink">获取完整版 → 官网</a>
                     </div>
-                    <button class="start-btn" id="startBtn" onclick="startDivination()">开始占卜</button>
+                    <button class="start-btn" id="startBtn" onclick="startDivination()" data-i18n="startDivination">开始占卜</button>
                 </div>
             </div>
             
@@ -1990,8 +2026,8 @@
                 <div class="history-list" id="historyList">
                     <div class="empty-history">
                         <div class="icon">📜</div>
-                        <p>暂无占卜记录</p>
-                        <p style="font-size: 12px; margin-top: 5px;">开始您的第一次占卜吧</p>
+                        <p data-i18n="noHistory">暂无占卜记录</p>
+                        <p style="font-size: 12px; margin-top: 5px;" data-i18n="startFirstDivination">开始您的第一次占卜吧</p>
                     </div>
                 </div>
             </div>
@@ -1999,26 +2035,26 @@
             <!-- 版本页面 -->
             <div class="section" id="version-section">
                 <div class="version-page-header">
-                    <h2>🏆 版本对比</h2>
-                    <p>选择适合您的版本，开启智慧占卜之旅</p>
+                    <h2 data-i18n="versionCompare">🏆 版本对比</h2>
+                    <p data-i18n="versionCompareDesc">选择适合您的版本，开启智慧占卜之旅</p>
                 </div>
                 
                 <div class="version-cards">
                     <!-- 开源版 -->
                     <div class="version-page-card current" style="max-width:400px;margin:0 auto;">
-                        <div class="version-page-badge">开源版</div>
+                        <div class="version-page-badge" data-i18n="openSourceEdition">开源版</div>
                         <div class="version-page-icon">⚡</div>
                         <div class="version-page-name">开源版 | Open Source</div>
                         <div class="version-page-price" style="color:#6a1b9a;">Free</div>
                         <div class="version-page-features">
-                            <div class="feature-row"><span class="feature-label">起卦方式</span><span class="feature-value" style="color:#6a1b9a;">✓ 全部起卦方式</span></div>
-                            <div class="feature-row"><span class="feature-label">解读深度</span><span class="feature-value" style="color:#6a1b9a;">✓ 基础解读</span></div>
-                            <div class="feature-row"><span class="feature-label">历史记录</span><span class="feature-value" style="color:#6a1b9a;">✓ 支持</span></div>
-                            <div class="feature-row"><span class="feature-label">学习中心</span><span class="feature-value" style="color:#6a1b9a;">✓ 完整开放</span></div>
-                            <div class="feature-row"><span class="feature-label">许可证</span><span class="feature-value" style="color:#6a1b9a;">BSL 1.1</span></div>
+                            <div class="feature-row"><span class="feature-label" data-i18n="featureMethod">起卦方式</span><span class="feature-value" style="color:#6a1b9a;" data-i18n="featureMethodValue">✓ 全部起卦方式</span></div>
+                            <div class="feature-row"><span class="feature-label" data-i18n="featureDepth">解读深度</span><span class="feature-value" style="color:#6a1b9a;" data-i18n="featureDepthValue">✓ 基础解读</span></div>
+                            <div class="feature-row"><span class="feature-label" data-i18n="featureHistory">历史记录</span><span class="feature-value" style="color:#6a1b9a;" data-i18n="featureSupported">✓ 支持</span></div>
+                            <div class="feature-row"><span class="feature-label" data-i18n="featureLearn">学习中心</span><span class="feature-value" style="color:#6a1b9a;" data-i18n="featureLearnValue">✓ 完整开放</span></div>
+                            <div class="feature-row"><span class="feature-label" data-i18n="featureLicense">许可证</span><span class="feature-value" style="color:#6a1b9a;">BSL 1.1</span></div>
                         </div>
                         <div class="version-page-buttons">
-                            <a href="https://zetian.i-ching-ai.com" target="_blank" class="upgrade-btn pro-btn" style="text-decoration:none;display:inline-block;">✨ 获取完整版 → 官网</a>
+                            <a href="https://zetian.i-ching-ai.com" target="_blank" class="upgrade-btn pro-btn" style="text-decoration:none;display:inline-block;" data-i18n="getFullVersionBtn">✨ 获取完整版 → 官网</a>
                         </div>
                     </div>
                     <div style="text-align:center;padding:15px;color:#999;font-size:13px;line-height:1.8;">
@@ -2032,10 +2068,10 @@
             <div class="section learn-view" id="learn-section">
                 <!-- 学习标签页 -->
                 <div class="learn-tabs">
-                    <button class="learn-tab-btn active" data-tab="basics">基础知识</button>
-                    <button class="learn-tab-btn" data-tab="hexagrams">六十四卦</button>
-                    <button class="learn-tab-btn" data-tab="faqs">常见问题</button>
-                    <button class="learn-tab-btn" data-tab="versions">版本对比</button>
+                    <button class="learn-tab-btn active" data-tab="basics" data-i18n="learnBasics">基础知识</button>
+                    <button class="learn-tab-btn" data-tab="hexagrams" data-i18n="learnHexagrams">六十四卦</button>
+                    <button class="learn-tab-btn" data-tab="faqs" data-i18n="learnFaqs">常见问题</button>
+                    <button class="learn-tab-btn" data-tab="versions" data-i18n="learnVersions">版本对比</button>
                 </div>
                 
                 <div class="learn-content">
@@ -2043,26 +2079,26 @@
                     <div class="learn-tab-pane active" id="basics-pane">
                         <!-- 八卦 -->
                         <div class="learn-section">
-                            <div class="learn-section-title"><span class="icon">☰</span>认识八卦</div>
+                            <div class="learn-section-title"><span class="icon">☰</span><span data-i18n="learnBagua">认识八卦</span></div>
                             <div class="learn-text">
-                                <p>八卦是六爻的基础，由三个爻组成。每个爻分阳爻（—）和阴爻（--），三个爻组合成八个符号：</p>
+                                <p data-i18n="baguaDesc">八卦是六爻的基础，由三个爻组成。每个爻分阳爻（—）和阴爻（--），三个爻组合成八个符号：</p>
                             </div>
                             <div class="bagua-grid">
-                                <div class="bagua-item"><div class="bagua-symbol">☰</div><div class="bagua-name">乾</div><div class="bagua-nature">天·金</div></div>
-                                <div class="bagua-item"><div class="bagua-symbol">☱</div><div class="bagua-name">兑</div><div class="bagua-nature">泽·金</div></div>
-                                <div class="bagua-item"><div class="bagua-symbol">☲</div><div class="bagua-name">离</div><div class="bagua-nature">火·火</div></div>
-                                <div class="bagua-item"><div class="bagua-symbol">☳</div><div class="bagua-name">震</div><div class="bagua-nature">雷·木</div></div>
-                                <div class="bagua-item"><div class="bagua-symbol">☴</div><div class="bagua-name">巽</div><div class="bagua-nature">风·木</div></div>
-                                <div class="bagua-item"><div class="bagua-symbol">☵</div><div class="bagua-name">坎</div><div class="bagua-nature">水·水</div></div>
-                                <div class="bagua-item"><div class="bagua-symbol">☶</div><div class="bagua-name">艮</div><div class="bagua-nature">山·土</div></div>
-                                <div class="bagua-item"><div class="bagua-symbol">☷</div><div class="bagua-name">坤</div><div class="bagua-nature">地·土</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☰</div><div class="bagua-name" data-i18n="baguaQian">乾</div><div class="bagua-nature" data-i18n="baguaQianNature">天·金</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☱</div><div class="bagua-name" data-i18n="baguaDui">兑</div><div class="bagua-nature" data-i18n="baguaDuiNature">泽·金</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☲</div><div class="bagua-name" data-i18n="baguaLi">离</div><div class="bagua-nature" data-i18n="baguaLiNature">火·火</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☳</div><div class="bagua-name" data-i18n="baguaZhen">震</div><div class="bagua-nature" data-i18n="baguaZhenNature">雷·木</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☴</div><div class="bagua-name" data-i18n="baguaXun">巽</div><div class="bagua-nature" data-i18n="baguaXunNature">风·木</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☵</div><div class="bagua-name" data-i18n="baguaKan">坎</div><div class="bagua-nature" data-i18n="baguaKanNature">水·水</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☶</div><div class="bagua-name" data-i18n="baguaGen">艮</div><div class="bagua-nature" data-i18n="baguaGenNature">山·土</div></div>
+                                <div class="bagua-item"><div class="bagua-symbol">☷</div><div class="bagua-name" data-i18n="baguaKun">坤</div><div class="bagua-nature" data-i18n="baguaKunNature">地·土</div></div>
                             </div>
                             <div class="learn-tip"><strong>记忆口诀：</strong>乾三连，坤六断，离中虚，坎中满，震仰盂，艮覆碗，兑上缺，巽下断。</div>
                         </div>
                         
                         <!-- 六爻 -->
                         <div class="learn-section">
-                            <div class="learn-section-title"><span class="icon">⚊</span>六爻构成</div>
+                            <div class="learn-section-title"><span class="icon">⚊</span><span data-i18n="learnLiuyao">六爻构成</span></div>
                             <div class="learn-text">
                                 <p>六爻卦由两个八卦组成：</p>
                                 <p>• <strong>上卦（外卦）</strong>：由四爻、五爻、上爻组成</p>
@@ -2074,7 +2110,7 @@
                         
                         <!-- 六亲 -->
                         <div class="learn-section">
-                            <div class="learn-section-title"><span class="icon">👨‍👩‍👧</span>六亲关系</div>
+                            <div class="learn-section-title"><span class="icon">👨‍👩‍👧</span><span data-i18n="learnLiuqin">六亲关系</span></div>
                             <div class="liuqin-list">
                                 <div class="liuqin-item"><span class="liuqin-name">父母</span><span class="liuqin-desc">代表父母、长辈、文书、合同、房子、车子等</span></div>
                                 <div class="liuqin-item"><span class="liuqin-name">官鬼</span><span class="liuqin-desc">代表上司、官员、丈夫、病痛、是非、压力等</span></div>
@@ -2086,7 +2122,7 @@
                         
                         <!-- 六神 -->
                         <div class="learn-section">
-                            <div class="learn-section-title"><span class="icon">🐉</span>六神</div>
+                            <div class="learn-section-title"><span class="icon">🐉</span><span data-i18n="learnLiushen">六神</span></div>
                             <div class="liuqin-list">
                                 <div class="liuqin-item"><span class="liuqin-name">青龙</span><span class="liuqin-desc">代表喜庆、桃花、贵人、东方</span></div>
                                 <div class="liuqin-item"><span class="liuqin-name">朱雀</span><span class="liuqin-desc">代表文书、口舌、南方、声音</span></div>
@@ -2099,7 +2135,7 @@
                         
                         <!-- 世应 -->
                         <div class="learn-section">
-                            <div class="learn-section-title"><span class="icon">⚖</span>世应关系</div>
+                            <div class="learn-section-title"><span class="icon">⚖</span><span data-i18n="learnShiying">世应关系</span></div>
                             <div class="learn-text">
                                 <p>• <strong>世爻</strong>：代表自己、问事者一方</p>
                                 <p>• <strong>应爻</strong>：代表对方、事项结果</p>
@@ -2112,7 +2148,7 @@
                     <!-- 六十四卦标签页 -->
                     <div class="learn-tab-pane" id="hexagrams-pane">
                         <div class="hexagram-search">
-                            <input type="text" class="hexagram-search-input" placeholder="🔍 搜索卦名..." id="hexagramSearchInput" oninput="searchHexagram()">
+                            <input type="text" class="hexagram-search-input" placeholder="🔍 搜索卦名..." id="hexagramSearchInput" data-i18n-placeholder="searchHexagram" oninput="searchHexagram()">
                         </div>
                         
                         <!-- 乾宫 -->
@@ -2209,36 +2245,36 @@
                     <!-- 常见问题标签页 -->
                     <div class="learn-tab-pane" id="faqs-pane">
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>六爻占卜准吗？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">占卜的准确度与多个因素有关：1) 求测者的心诚程度；2) 问题的清晰度和具体性；3) 占卜时的状态和环境。心诚则灵是传统占卜的基本原则。</div>
+                            <div class="faq-question"><span data-i18n="faq1Q">六爻占卜准吗？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq1A">占卜的准确度与多个因素有关：1) 求测者的心诚程度；2) 问题的清晰度和具体性；3) 占卜时的状态和环境。心诚则灵是传统占卜的基本原则。</div>
                         </div>
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>可以问什么事？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">原则上任何事都可以占卜问询，包括：事业发展、感情婚姻、财运投资、出行平安、求职考试等。但涉及生死大事、违法犯罪之事不建议占卜。</div>
+                            <div class="faq-question"><span data-i18n="faq2Q">可以问什么事？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq2A">原则上任何事都可以占卜问询，包括：事业发展、感情婚姻、财运投资、出行平安、求职考试等。但涉及生死大事、违法犯罪之事不建议占卜。</div>
                         </div>
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>同一件事能反复占卜吗？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">不建议。同一事情多次占卜会导致卦象混乱、不一致，反而让人无所适从。初卦往往最能反映真实情况，不如初卦可信。若有疑问，可在七日后重新占卜。</div>
+                            <div class="faq-question"><span data-i18n="faq3Q">同一件事能反复占卜吗？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq3A">不建议。同一事情多次占卜会导致卦象混乱、不一致，反而让人无所适从。初卦往往最能反映真实情况，不如初卦可信。若有疑问，可在七日后重新占卜。</div>
                         </div>
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>动爻是什么意思？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">动爻是老阳和老阴爻，老阳（○）会变成阴爻，老阴（×）会变成阳爻。动爻代表变化的因素，是解卦的重要参考。变爻后的卦称为"变卦"或"之卦"。</div>
+                            <div class="faq-question"><span data-i18n="faq4Q">动爻是什么意思？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq4A">动爻是老阳和老阴爻，老阳（○）会变成阴爻，老阴（×）会变成阳爻。动爻代表变化的因素，是解卦的重要参考。变爻后的卦称为"变卦"或"之卦"。</div>
                         </div>
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>如何提高占卜准确度？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">1. 心态平和、诚心专注；2. 问题要明确具体；3. 诚心祈愿后再起卦；4. 在安静不受打扰的环境下进行；5. 使用传统铜钱更佳。</div>
+                            <div class="faq-question"><span data-i18n="faq5Q">如何提高占卜准确度？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq5A">1. 心态平和、诚心专注；2. 问题要明确具体；3. 诚心祈愿后再起卦；4. 在安静不受打扰的环境下进行；5. 使用传统铜钱更佳。</div>
                         </div>
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>世爻和应爻代表什么？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">世爻代表问事者本人，应爻代表对方或事项的最终结果。世应之间的关系（相生则吉，相克则凶，比和则平稳）是判断吉凶的重要依据。</div>
+                            <div class="faq-question"><span data-i18n="faq6Q">世爻和应爻代表什么？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq6A">世爻代表问事者本人，应爻代表对方或事项的最终结果。世应之间的关系（相生则吉，相克则凶，比和则平稳）是判断吉凶的重要依据。</div>
                         </div>
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>六亲各代表什么？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">父母：代表父母、长辈、文书、房子、车辆等；官鬼：代表上司、官员、丈夫、压力、病痛等；妻财：代表妻子、财产、金钱、食物等；兄弟：代表兄弟姐妹、朋友、竞争对手等；子孙：代表子女、晚辈、喜悦、医生、药物等。</div>
+                            <div class="faq-question"><span data-i18n="faq7Q">六亲各代表什么？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq7A">父母：代表父母、长辈、文书、房子、车辆等；官鬼：代表上司、官员、丈夫、压力、病痛等；妻财：代表妻子、财产、金钱、食物等；兄弟：代表兄弟姐妹、朋友、竞争对手等；子孙：代表子女、晚辈、喜悦、医生、药物等。</div>
                         </div>
                         <div class="faq-item" onclick="toggleFaq(this)">
-                            <div class="faq-question"><span>什么是互卦？</span><span class="faq-icon">+</span></div>
-                            <div class="faq-answer">互卦是取本卦中间四爻变化而来，反映事情发展过程中的变化。互卦的上卦由二三四爻组成，下卦由三四五爻组成。互卦可以补充参考本卦未能完全显示的信息。</div>
+                            <div class="faq-question"><span data-i18n="faq8Q">什么是互卦？</span><span class="faq-icon">+</span></div>
+                            <div class="faq-answer" data-i18n="faq8A">互卦是取本卦中间四爻变化而来，反映事情发展过程中的变化。互卦的上卦由二三四爻组成，下卦由三四五爻组成。互卦可以补充参考本卦未能完全显示的信息。</div>
                         </div>
                     </div>
                     
@@ -2259,7 +2295,7 @@
                                 <div class="feature-item"><span class="check">✓</span> BSL 1.1 许可证开源</div>
                             </div>
                             <div style="text-align:center;margin-top:12px;">
-                                <a href="https://zetian.i-ching-ai.com" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7b1fa2,#9c27b0);color:#fff;border:none;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:bold;text-decoration:none;">✨ 获取完整版 → 官网</a>
+                                <a href="https://zetian.i-ching-ai.com" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7b1fa2,#9c27b0);color:#fff;border:none;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:bold;text-decoration:none;" data-i18n="getFullVersionBtn">✨ 获取完整版 → 官网</a>
                             </div>
                         </div>
                     </div>
@@ -2271,15 +2307,15 @@
         <div class="bottom-nav">
             <div class="nav-item active" data-tab="divination">
                 <span class="icon">🪙</span>
-                <span class="text">起卦</span>
+                <span class="text" data-i18n="navDivination">起卦</span>
             </div>
             <div class="nav-item" data-tab="history">
                 <span class="icon">📜</span>
-                <span class="text">历史</span>
+                <span class="text" data-i18n="navHistory">历史</span>
             </div>
             <div class="nav-item" data-tab="learn">
                 <span class="icon">📚</span>
-                <span class="text">学习</span>
+                <span class="text" data-i18n="navLearn">学习</span>
             </div>
         </div>
     </div>
@@ -2289,18 +2325,18 @@
         <!-- 顶部导航 -->
         <div class="divination-header">
             <button class="back-btn" onclick="goBackToHome()">←</button>
-            <div class="header-title">金钱卦起卦</div>
+            <div class="header-title" data-i18n="coinDivinationTitle">金钱卦起卦</div>
             <div class="header-spacer"></div>
         </div>
         
         <!-- 问题提示 -->
         <div class="question-bar" id="questionBar">
-            <span>📝</span> <span id="questionTextDisplay">请诚心默念您的问题</span>
+            <span>📝</span> <span id="questionTextDisplay" data-i18n-default="sincerelyChant">请诚心默念您的问题</span>
         </div>
         
         <!-- 进度指示 -->
         <div class="progress-section">
-            <div class="progress-text">第 <span id="currentYaoDisplay">1</span> 爻 / 共 6 爻</div>
+            <div class="progress-text"><span data-i18n-prefix="yaoProgressPrefix">第</span> <span id="currentYaoDisplay">1</span> <span data-i18n="yaoProgressMiddle">爻</span> / <span data-i18n="yaoProgressTotal">共 6 爻</span></div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFillDisplay" style="width: 0%"></div>
             </div>
@@ -2308,22 +2344,22 @@
         
         <!-- 爻象显示区 -->
         <div class="yao-display" id="yaoDisplayContainer">
-            <div class="yao-item" data-yao="6">上爻</div>
-            <div class="yao-item" data-yao="5">五爻</div>
-            <div class="yao-item" data-yao="4">四爻</div>
-            <div class="yao-item" data-yao="3">三爻</div>
-            <div class="yao-item" data-yao="2">二爻</div>
-            <div class="yao-item active" data-yao="1">初爻</div>
+            <div class="yao-item" data-yao="6" data-i18n="yaoTop">上爻</div>
+            <div class="yao-item" data-yao="5" data-i18n="yaoFive">五爻</div>
+            <div class="yao-item" data-yao="4" data-i18n="yaoFour">四爻</div>
+            <div class="yao-item" data-yao="3" data-i18n="yaoThree">三爻</div>
+            <div class="yao-item" data-yao="2" data-i18n="yaoTwo">二爻</div>
+            <div class="yao-item active" data-yao="1" data-i18n="yaoOne">初爻</div>
         </div>
         
         <!-- 容器选择 -->
         <div class="container-section">
             <div class="container-type">
-                <h4>选择盛装容器</h4>
+                <h4 data-i18n="selectContainer">选择盛装容器</h4>
                 <div class="container-options">
-                    <button class="container-btn active" data-container="turtle" onclick="selectContainer('turtle')">🐢 龟壳</button>
-                    <button class="container-btn" data-container="bamboo" onclick="selectContainer('bamboo')">🎋 竹筒</button>
-                    <button class="container-btn" data-container="hand" onclick="selectContainer('hand')">🤲 手摇</button>
+                    <button class="container-btn active" data-container="turtle" onclick="selectContainer('turtle')" data-i18n="containerTurtle">🐢 龟壳</button>
+                    <button class="container-btn" data-container="bamboo" onclick="selectContainer('bamboo')" data-i18n="containerBamboo">🎋 竹筒</button>
+                    <button class="container-btn" data-container="hand" onclick="selectContainer('hand')" data-i18n="containerHand">🤲 手摇</button>
                 </div>
             </div>
             
@@ -2351,22 +2387,22 @@
                 <!-- 结果显示 -->
                 <div class="result-display" id="resultDisplayContainer">
                     <div class="result-symbol" id="resultSymbolDisplay">—</div>
-                    <div class="result-text" id="resultTextDisplay">阳爻</div>
+                    <div class="result-text" id="resultTextDisplay" data-i18n-default="yangYao">阳爻</div>
                 </div>
             </div>
             
             <button class="shake-btn" id="shakeBtnContainer" onclick="shakeAndDivine()">
-                🪙 摇 卦
+                <span data-i18n="shakeBtn">🪙 摇 卦</span>
             </button>
             
             <div class="hint-text" id="hintTextDisplay">
-                诚心默念问题后<br>点击上方"摇卦"按钮
+                <span data-i18n="hintText">诚心默念问题后<br>点击上方"摇卦"按钮</span>
             </div>
         </div>
         
         <!-- 已摇结果 -->
         <div class="yao-history" id="yaoHistoryContainer" style="display: none;">
-            <h4>📜 卦象记录</h4>
+            <h4 data-i18n="yaoRecord">📜 卦象记录</h4>
             <div class="yao-list" id="yaoListContainer"></div>
         </div>
         
@@ -2374,9 +2410,9 @@
         <div class="complete-panel" id="completePanelContainer">
             <div class="complete-gua" id="completeSymbolDisplay">☰☷</div>
             <div class="complete-name" id="completeNameDisplay">地天泰</div>
-            <div class="complete-dong" id="completeDongDisplay">动爻：无</div>
-            <button class="view-result-btn" onclick="viewResult()">查看解卦结果</button>
-            <button class="reset-btn" onclick="resetDivination()">重新起卦</button>
+            <div class="complete-dong" id="completeDongDisplay"><span data-i18n-prefix="dongYaoPrefix">动爻：</span><span data-i18n="noDongYao">无</span></div>
+            <button class="view-result-btn" onclick="viewResult()" data-i18n="viewResult">查看解卦结果</button>
+            <button class="reset-btn" onclick="resetDivination()" data-i18n="resetDivination">重新起卦</button>
         </div>
     </div>
     
@@ -2385,7 +2421,7 @@
         <!-- 顶部导航 -->
         <div class="divination-header">
             <button class="back-btn" onclick="goBackToDivination()">←</button>
-            <div class="header-title">解卦结果</div>
+            <div class="header-title" data-i18n="resultTitle">解卦结果</div>
             <div style="width: 40px;"></div>
         </div>
         
@@ -2398,24 +2434,24 @@
         
         <!-- 问题区 -->
         <div class="question-section-result">
-            <div class="question-label">您的问题</div>
+            <div class="question-label" data-i18n="yourQuestion">您的问题</div>
             <div class="question-text" id="resultQuestionText">明日出行是否顺利？</div>
         </div>
         
         <!-- 卦象对照 -->
         <div class="gua-comparison">
             <div class="gua-card main">
-                <div class="gua-card-label">本卦</div>
+                <div class="gua-card-label" data-i18n="benGua">本卦</div>
                 <div class="gua-card-symbol" id="resultBenSymbol">☰☷</div>
                 <div class="gua-card-name" id="resultBenName">地天泰</div>
             </div>
             <div class="gua-card">
-                <div class="gua-card-label">互卦</div>
+                <div class="gua-card-label" data-i18n="huGua">互卦</div>
                 <div class="gua-card-symbol" id="resultHuSymbol">☲☰</div>
                 <div class="gua-card-name" id="resultHuName">火天大有</div>
             </div>
             <div class="gua-card">
-                <div class="gua-card-label">变卦</div>
+                <div class="gua-card-label" data-i18n="bianGua">变卦</div>
                 <div class="gua-card-symbol" id="resultBianSymbol">☰☰</div>
                 <div class="gua-card-name" id="resultBianName">乾为天</div>
             </div>
@@ -2423,26 +2459,26 @@
         
         <!-- 六爻排盘 -->
         <div class="paipan-section">
-            <div class="paipan-title">六爻排盘</div>
+            <div class="paipan-title" data-i18n="paipanTitle">六爻排盘</div>
             <div class="paipan-header">
                 <span style="width: 40px;"></span>
                 <span style="width: 35px; text-align: center;">爻象</span>
                 <span style="width: 20px;"></span>
-                <span style="width: 30px; text-align: center;">天干</span>
-                <span style="width: 35px; text-align: center;">地支</span>
-                <span style="width: 35px; text-align: center;">六亲</span>
-                <span style="width: 35px; text-align: center;">六神</span>
-                <span style="width: 35px; text-align: center;">世应</span>
+                <span style="width: 30px; text-align: center;" data-i18n="paipanTiangan">天干</span>
+                <span style="width: 35px; text-align: center;" data-i18n="paipanDizhi">地支</span>
+                <span style="width: 35px; text-align: center;" data-i18n="paipanLiuqin">六亲</span>
+                <span style="width: 35px; text-align: center;" data-i18n="paipanLiushen">六神</span>
+                <span style="width: 35px; text-align: center;" data-i18n="paipanShiying">世应</span>
             </div>
             <div id="resultPaipanContainer"></div>
             
             <div class="shiying-info">
                 <div class="shiying-item">
-                    <span class="shiying-label">世爻：</span>
+                    <span class="shiying-label" data-i18n="shiYao">世爻：</span>
                     <span class="shiying-value" id="resultShiYao">五爻</span>
                 </div>
                 <div class="shiying-item">
-                    <span class="shiying-label">应爻：</span>
+                    <span class="shiying-label" data-i18n="yingYao">应爻：</span>
                     <span class="shiying-value" id="resultYingYao">二爻</span>
                 </div>
             </div>
@@ -2459,7 +2495,7 @@
         
         <!-- 核心提示 -->
         <div class="tips-section">
-            <div class="tips-title">💡 择天老师提示</div>
+            <div class="tips-title" data-i18n="tipsTitle">💡 择天老师提示</div>
             <div class="tips-content" id="resultTipsContent">
                 泰卦表示通泰，问事当以守正为本。动爻在五爻，需注意上级或长辈方面的变化...
             </div>
@@ -2467,8 +2503,8 @@
         
         <!-- 操作按钮 -->
         <div class="action-btns">
-            <button class="action-btn secondary" onclick="shareResult()">📤 分享结果</button>
-            <button class="action-btn primary" onclick="finishAndBack()">✅ 完成</button>
+            <button class="action-btn secondary" onclick="shareResult()" data-i18n="shareResult">📤 分享结果</button>
+            <button class="action-btn primary" onclick="finishAndBack()" data-i18n="finishBtn">✅ 完成</button>
         </div>
     </div>
     
@@ -2487,7 +2523,7 @@
     <div class="modal-overlay" id="historyModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>占卜详情</h3>
+                <h3 data-i18n="historyDetail">占卜详情</h3>
                 <button class="modal-close" onclick="closeHistoryModal()">×</button>
             </div>
             <div id="historyDetailContainer"></div>
@@ -2495,6 +2531,376 @@
     </div>
 
     <script>
+        // ========== 国际化 i18n ==========
+        const i18n = {
+            zh: {
+                'appTitle': '择 天 易',
+                'navDivination': '起卦',
+                'navHistory': '历史',
+                'navLearn': '学习',
+                'navVersion': '版本',
+                'divinationIntroTitle': '✦ 缘起 ✦',
+                'divinationIntroDesc': '易经之道，藏乎阴阳变易之中<br>心诚则灵，一念之间，卦象自现',
+                'selectMethod': '选择起卦方式',
+                'methodCoin': '金钱卦',
+                'methodCoinDesc': '三枚铜钱摇六次<br>传统六爻占卜法',
+                'methodNumber': '报数起卦',
+                'methodNumberDesc': '默念问题报三个数<br>快速起卦',
+                'methodTime': '时间起卦',
+                'methodTimeDesc': '根据当前时间<br>自动起卦',
+                'methodRandom': '随心卦',
+                'methodRandomDesc': '念头一动即成卦<br>直觉占卜',
+                'questionTitle': '📝 请描述您想问的事情',
+                'questionPlaceholder': '例如：明日出行是否顺利？\n      最近工作运势如何？',
+                'freeRemainToday': '免费版 · 今日剩余：',
+                'startDivination': '开始占卜',
+                'noHistory': '暂无占卜记录',
+                'startFirstDivination': '开始您的第一次占卜吧',
+                'versionCompare': '🏆 版本对比',
+                'versionCompareDesc': '选择适合您的版本，开启智慧占卜之旅',
+                'openSourceEdition': '开源版',
+                'featureMethod': '起卦方式',
+                'featureMethodValue': '✓ 全部起卦方式',
+                'featureDepth': '解读深度',
+                'featureDepthValue': '✓ 基础解读',
+                'featureHistory': '历史记录',
+                'featureSupported': '✓ 支持',
+                'featureLearn': '学习中心',
+                'featureLearnValue': '✓ 完整开放',
+                'featureLicense': '许可证',
+                'timesSuffix': ' 次',
+                'getFullVersionLink': '获取完整版 → 官网',
+                'getFullVersionBtn': '✨ 获取完整版 → 官网',
+                'learnBasics': '基础知识',
+                'learnHexagrams': '六十四卦',
+                'learnFaqs': '常见问题',
+                'learnVersions': '版本对比',
+                'learnBagua': '认识八卦',
+                'learnLiuyao': '六爻构成',
+                'learnLiuqin': '六亲关系',
+                'learnLiushen': '六神',
+                'learnShiying': '世应关系',
+                'searchHexagram': '🔍 搜索卦名...',
+                'coinDivinationTitle': '金钱卦起卦',
+                'sincerelyChant': '请诚心默念您的问题',
+                'yaoProgressPrefix': '第',
+                'yaoProgressMiddle': '爻',
+                'yaoProgressTotal': '共 6 爻',
+                'yaoOne': '初爻', 'yaoTwo': '二爻', 'yaoThree': '三爻',
+                'yaoFour': '四爻', 'yaoFive': '五爻', 'yaoTop': '上爻',
+                'selectContainer': '选择盛装容器',
+                'containerTurtle': '🐢 龟壳',
+                'containerBamboo': '🎋 竹筒',
+                'containerHand': '🤲 手摇',
+                'shakeBtn': '🪙 摇 卦',
+                'yangYao': '阳爻',
+                'yinYao': '阴爻',
+                'laoYang': '老阳（动爻）',
+                'laoYin': '老阴（动爻）',
+                'hintText': '诚心默念问题后<br>点击上方"摇卦"按钮',
+                'yaoRecord': '📜 卦象记录',
+                'dongYaoPrefix': '动爻：',
+                'noDongYao': '无',
+                'viewResult': '查看解卦结果',
+                'resetDivination': '重新起卦',
+                'resultTitle': '解卦结果',
+                'yourQuestion': '您的问题',
+                'benGua': '本卦',
+                'huGua': '互卦',
+                'bianGua': '变卦',
+                'noBianGua': '无变卦',
+                'paipanTitle': '六爻排盘',
+                'paipanTiangan': '天干',
+                'paipanDizhi': '地支',
+                'paipanLiuqin': '六亲',
+                'paipanLiushen': '六神',
+                'paipanShiying': '世应',
+                'shiYao': '世爻：',
+                'yingYao': '应爻：',
+                'judgeGood': '吉',
+                'judgeBad': '凶',
+                'judgeAverage': '平',
+                'titleGood': '卦象吉利，事事顺遂',
+                'titleBad': '卦象多艰，需谨慎行事',
+                'titleAverage': '卦象平常，稳中求进',
+                'titleDefault': '卦象平和',
+                'defaultDesc': '此卦中正平和，适宜顺势而为',
+                'tipsTitle': '💡 择天老师提示',
+                'shareResult': '📤 分享结果',
+                'finishBtn': '✅ 完成',
+                'historyDetail': '占卜详情',
+                'questionLabel': '问事：',
+                'dateLabel': '日期：',
+                'analysisLabel': '简析：',
+                'upgradeTitle': '🚀 获取完整版',
+                'upgradeDesc': '深度解读 · 场景化分析 · 专业报告<br>更多功能等你探索',
+                'alertDailyLimit': '今日起卦次数已用完（每日{0}次）\n\n获取完整版请访问官网: zetian.i-ching-ai.com | 微信小程序搜「易学轻松玩」',
+                'alertInputQuestion': '请先描述您想问的事情',
+                'alertOtherMethods': '其他起卦方式正在开发中，敬请期待！',
+                'alertDataLost': '数据丢失，请重新起卦',
+                'alertCopied': '已复制到剪贴板',
+                'continueShake': '继续摇第{0}爻...',
+                'dongYaoSuffix': '爻',
+                'shareTitle': '【择天易数·六爻占卜】',
+                'shareQuestion': '问题：',
+                'shareBenGua': '本卦：',
+                'shareJudge': '吉凶：',
+                'shareFooter': '—— 择天易数·六爻占卜',
+                'paipanLoadFailed': '排盘数据加载失败',
+                'tipDongYaoInner': '代表内在因素，变化较多；',
+                'tipDongYaoOuter': '代表外在表现，需防变故；',
+                'tipAdvice': ' 建议：诚心做事，顺其自然。',
+                'tipDongYaoAt': '动爻在',
+                'tipNeedAttention': '，需关注此方面的变化。',
+                                'faq1Q': '六爻占卜准吗？',
+                'faq1A': '占卜的准确度与多个因素有关：1) 求测者的心诚程度；2) 问题的清晰度和具体性；3) 占卜时的状态和环境。心诚则灵是传统占卜的基本原则。',
+                'faq2Q': '可以问什么事？',
+                'faq2A': '原则上任何事都可以占卜问询，包括：事业发展、感情婚姻、财运投资、出行平安、求职考试等。但涉及生死大事、违法犯罪之事不建议占卜。',
+                'faq4Q': '动爻是什么意思？',
+                'faq4A': '动爻是老阳和老阴爻，老阳（○）会变成阴爻，老阴（×）会变成阳爻。动爻代表变化的因素，是解卦的重要参考。变爻后的卦称为"变卦"或"之卦"。',
+                'faq6Q': '世爻和应爻代表什么？',
+                'faq6A': '世爻代表问事者本人，应爻代表对方或事项的最终结果。世应之间的关系（相生则吉，相克则凶，比和则平稳）是判断吉凶的重要依据。',
+                'faq7Q': '六亲各代表什么？',
+                'faq7A': '父母：代表父母、长辈、文书、房子、车辆等；官鬼：代表上司、官员、丈夫、压力、病痛等；妻财：代表妻子、财产、金钱、食物等；兄弟：代表兄弟姐妹、朋友、竞争对手等；子孙：代表子女、晚辈、喜悦、医生、药物等。',
+                'faq8Q': '什么是互卦？',
+                'faq8A': '互卦是取本卦中间四爻变化而来，反映事情发展过程中的变化。互卦的上卦由二三四爻组成，下卦由三四五爻组成。互卦可以补充参考本卦未能完全显示的信息。',
+                'yaoTwo': '二爻',
+                'yaoThree': '三爻',
+                'yaoFive': '五爻',
+                'yaoTop': '上爻',
+                'baguaQian': '乾', 'baguaDui': '兑', 'baguaLi': '离', 'baguaZhen': '震',
+                'baguaXun': '巽', 'baguaKan': '坎', 'baguaGen': '艮', 'baguaKun': '坤',
+                'baguaQianNature': '天·金', 'baguaDuiNature': '泽·金', 'baguaLiNature': '火·火', 'baguaZhenNature': '雷·木',
+                'baguaXunNature': '风·木', 'baguaKanNature': '水·水', 'baguaGenNature': '山·土', 'baguaKunNature': '地·土',
+'guaXing': '卦性',
+                'wuXing': '五行',
+                'jiXiong': '吉凶',
+                'guaXiangJieDu': '卦象解读',
+                'faq3Q': '同一件事能反复占卜吗？',
+                'faq3A': '不建议。同一事情多次占卜会导致卦象混乱、不一致，反而让人无所适从。初卦往往最能反映真实情况，不如初卦可信。若有疑问，可在七日后重新占卜。',
+                'faq5Q': '如何提高占卜准确度？',
+                'faq5A': '1. 心态平和、诚心专注；2. 问题要明确具体；3. 诚心祈愿后再起卦；4. 在安静不受打扰的环境下进行；5. 使用传统铜钱更佳。',
+                'baguaDesc': '八卦是六爻的基础，由三个爻组成。每个爻分阳爻（—）和阴爻（--），三个爻组合成八个符号：',
+
+            },
+            en: {
+                'appTitle': 'I-Ching Divination',
+                'navDivination': 'Divination',
+                'navHistory': 'History',
+                'navLearn': 'Learn',
+                'navVersion': 'Edition',
+                'divinationIntroTitle': '✦ The Origin ✦',
+                'divinationIntroDesc': 'The Way of I-Ching dwells in yin-yang transformation<br>Sincerity awakens wisdom — a single thought reveals the hexagram',
+                'selectMethod': 'Choose Your Method',
+                'methodCoin': 'Coin Method',
+                'methodCoinDesc': 'Three coins, six casts<br>Traditional Liu Yao divination',
+                'methodNumber': 'Number Method',
+                'methodNumberDesc': 'Think of your question, give three numbers<br>Quick casting',
+                'methodTime': 'Time Method',
+                'methodTimeDesc': 'Based on current time<br>Automatic casting',
+                'methodRandom': 'Intuitive Cast',
+                'methodRandomDesc': 'A thought becomes a hexagram<br>Intuitive reading',
+                'questionTitle': '📝 Describe what you want to ask',
+                'questionPlaceholder': 'e.g.: Will my trip tomorrow go smoothly?\n      How is my career fortune lately?',
+                'freeRemainToday': 'Free · Remaining today: ',
+                'startDivination': 'Start Reading',
+                'noHistory': 'No divination records yet',
+                'startFirstDivination': 'Start your first reading',
+                'versionCompare': '🏆 Edition Comparison',
+                'versionCompareDesc': 'Choose the right edition for your spiritual journey',
+                'openSourceEdition': 'Open Source',
+                'featureMethod': 'Casting Methods',
+                'featureMethodValue': '✓ All methods',
+                'featureDepth': 'Reading Depth',
+                'featureDepthValue': '✓ Basic reading',
+                'featureHistory': 'History',
+                'featureSupported': '✓ Supported',
+                'featureLearn': 'Learning Center',
+                'featureLearnValue': '✓ Full access',
+                'featureLicense': 'License',
+                'timesSuffix': '',
+                'getFullVersionLink': 'Get Full Version → Website',
+                'getFullVersionBtn': '✨ Get Full Version → Website',
+                'learnBasics': 'Basics',
+                'learnHexagrams': '64 Hexagrams',
+                'learnFaqs': 'FAQ',
+                'learnVersions': 'Editions',
+                'learnBagua': 'The Eight Trigrams',
+                'learnLiuyao': 'Six-Line Structure',
+                'learnLiuqin': 'Six Relations',
+                'learnLiushen': 'Six Spirits',
+                'learnShiying': 'Self & Response',
+                'searchHexagram': '🔍 Search hexagram...',
+                'coinDivinationTitle': 'Coin Method',
+                'sincerelyChant': 'Focus on your question with sincerity',
+                'yaoProgressPrefix': 'Line',
+                'yaoProgressMiddle': '',
+                'yaoProgressTotal': 'of 6',
+                'yaoOne': '1st', 'yaoTwo': '2nd', 'yaoThree': '3rd',
+                'yaoFour': '4th', 'yaoFive': '5th', 'yaoTop': '6th',
+                'selectContainer': 'Choose Container',
+                'containerTurtle': '🐢 Shell',
+                'containerBamboo': '🎋 Tube',
+                'containerHand': '🤲 Hand',
+                'shakeBtn': '🪙 Cast Coins',
+                'yangYao': 'Yang Line',
+                'yinYao': 'Yin Line',
+                'laoYang': 'Old Yang (Moving)',
+                'laoYin': 'Old Yin (Moving)',
+                'hintText': 'Focus on your question<br>then tap "Cast Coins" above',
+                'yaoRecord': '📜 Hexagram Record',
+                'dongYaoPrefix': 'Moving: ',
+                'noDongYao': 'None',
+                'viewResult': 'View Reading',
+                'resetDivination': 'Cast Again',
+                'resultTitle': 'Reading Result',
+                'yourQuestion': 'Your Question',
+                'benGua': 'Primary',
+                'huGua': 'Nuclear',
+                'bianGua': 'Changed',
+                'noBianGua': 'No Change',
+                'paipanTitle': 'Six-Line Chart',
+                'paipanTiangan': 'Stem',
+                'paipanDizhi': 'Branch',
+                'paipanLiuqin': 'Relation',
+                'paipanLiushen': 'Spirit',
+                'paipanShiying': 'Self/Rsp',
+                'shiYao': 'Self: ',
+                'yingYao': 'Resp: ',
+                'judgeGood': 'Auspicious',
+                'judgeBad': 'Challenging',
+                'judgeAverage': 'Neutral',
+                'titleGood': 'Auspicious reading — smooth sailing ahead',
+                'titleBad': 'Challenging reading — proceed with care',
+                'titleAverage': 'Neutral reading — steady progress',
+                'titleDefault': 'Balanced reading',
+                'defaultDesc': 'This hexagram is balanced and harmonious — follow the natural flow.',
+                'tipsTitle': '💡 Master Zeyue\'s Insight',
+                'shareResult': '📤 Share',
+                'finishBtn': '✅ Done',
+                'historyDetail': 'Reading Details',
+                'questionLabel': 'Question: ',
+                'dateLabel': 'Date: ',
+                'analysisLabel': 'Analysis: ',
+                'upgradeTitle': '🚀 Get Full Version',
+                'upgradeDesc': 'Deep Reading · Scenario Analysis · Professional Report<br>More features to explore',
+                'alertDailyLimit': 'Daily limit reached ({0} per day)\n\nGet the full version at: zetian.i-ching-ai.com',
+                'alertInputQuestion': 'Please describe your question first',
+                'alertOtherMethods': 'Other methods coming soon!',
+                'alertDataLost': 'Data lost, please cast again',
+                'alertCopied': 'Copied to clipboard',
+                'continueShake': 'Cast line {0}...',
+                'dongYaoSuffix': '',
+                'shareTitle': '【I-Ching Divination】',
+                'shareQuestion': 'Question: ',
+                'shareBenGua': 'Primary: ',
+                'shareJudge': 'Verdict: ',
+                'shareFooter': '—— I-Ching Divination',
+                'paipanLoadFailed': 'Chart data failed to load',
+                'tipDongYaoInner': 'represents inner factors with much change;',
+                'tipDongYaoOuter': 'represents external expression — beware of shifts;',
+                'tipAdvice': ' Advice: Stay sincere, let nature take its course.',
+                'tipDongYaoAt': 'Moving at ',
+                'tipNeedAttention': ' — pay attention to changes here.',
+                                'faq1Q': 'Is Liu Yao divination accurate?',
+                'faq1A': 'Accuracy depends on several factors: 1) Your sincerity and focus; 2) The clarity and specificity of your question; 3) Your state of mind and environment. Sincerity is the fundamental principle.',
+                'faq2Q': 'What can I ask about?',
+                'faq2A': 'In principle, you can ask about anything: career, romance, finance, travel safety, exams, etc. However, matters of life-and-death or illegal activities are not recommended for divination.',
+                'faq4Q': 'What does a moving line mean?',
+                'faq4A': 'Moving lines are Old Yang (○) and Old Yin (×). Old Yang transforms into Yin, Old Yin transforms into Yang. Moving lines represent factors of change and are key references in interpretation. The transformed hexagram is called the "Changed Hexagram".',
+                'faq6Q': 'What do Self and response lines represent?',
+                'faq6A': 'The Self line represents you, the questioner. The Response line represents the other party or the outcome. Their relationship (mutual generation = auspicious, mutual control = challenging, harmony = stable) is key to judgment.',
+                'faq7Q': 'What do the Six Relations represent?',
+                'faq7A': 'Parents: elders, documents, property; Official: authority, pressure, spouse (for women); Wealth: money, spouse (for men), resources; Sibling: friends, competitors; Offspring: children, joy, healing.',
+                'faq8Q': 'What is the Nuclear Hexagram?',
+                'faq8A': 'The Nuclear Hexagram is formed from the middle four lines of the Primary Hexagram, reflecting the process of development. Its upper trigram comes from lines 2-3-4, and its lower trigram from lines 3-4-5. It provides additional insight beyond the Primary Hexagram.',
+                'yaoTwo': '2nd',
+                'yaoThree': '3rd',
+                'yaoFive': '5th',
+                'yaoTop': '6th',
+                'baguaQian': 'Qian', 'baguaDui': 'Dui', 'baguaLi': 'Li', 'baguaZhen': 'Zhen',
+                'baguaXun': 'Xun', 'baguaKan': 'Kan', 'baguaGen': 'Gen', 'baguaKun': 'Kun',
+                'baguaQianNature': 'Heaven·Metal', 'baguaDuiNature': 'Lake·Metal', 'baguaLiNature': 'Fire·Fire', 'baguaZhenNature': 'Thunder·Wood',
+                'baguaXunNature': 'Wind·Wood', 'baguaKanNature': 'Water·Water', 'baguaGenNature': 'Mountain·Earth', 'baguaKunNature': 'Earth·Earth',
+'guaXing': 'Nature',
+                'wuXing': 'Element',
+                'jiXiong': 'Verdict',
+                'guaXiangJieDu': 'Hexagram Reading',
+                'faq3Q': 'Can I ask the same question repeatedly?',
+                'faq3A': 'Not recommended. Multiple readings on the same question create confusion and inconsistency. The first reading is usually the most reliable. Wait at least seven days before recasting.',
+                'faq5Q': 'How can I improve accuracy?',
+                'faq5A': '1. Stay calm and focused; 2. Be specific about your question; 3. Set your intention before casting; 4. Find a quiet, undisturbed environment; 5. Traditional copper coins work best.',
+                'baguaDesc': 'The Eight Trigrams are the foundation of Liu Yao, each composed of three lines segments. Each line is either Yang (—) or Yin (--), and three lines combine to form eight symbols:',
+
+            }
+        };
+
+        let currentLang = localStorage.getItem('zettian-lang') || 'zh';
+        const isEn = () => currentLang === 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('zettian-lang', lang);
+            applyLanguage();
+        }
+
+        function t(key) {
+            return (i18n[currentLang] && i18n[currentLang][key]) || key;
+        }
+
+        function applyLanguage() {
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            document.title = currentLang === 'zh' ? '择天易数 - 开源版 | ZeyueYi Open Source' : 'ZeyueYi - Open Source | I-Ching Divination';
+
+            const langZh = document.getElementById('langZh');
+            const langEn = document.getElementById('langEn');
+            if (langZh) langZh.classList.toggle('active', currentLang === 'zh');
+            if (langEn) langEn.classList.toggle('active', currentLang === 'en');
+
+            // Update all data-i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang] && i18n[currentLang][key]) {
+                    el.innerHTML = i18n[currentLang][key];
+                }
+            });
+
+            // Update data-i18n-prefix elements
+            document.querySelectorAll('[data-i18n-prefix]').forEach(el => {
+                const key = el.getAttribute('data-i18n-prefix');
+                if (i18n[currentLang] && i18n[currentLang][key]) {
+                    // Only update direct text nodes, not child elements
+                    const firstText = el.childNodes[0];
+                    if (firstText && firstText.nodeType === 3) {
+                        firstText.textContent = i18n[currentLang][key];
+                    }
+                }
+            });
+
+            // Update data-i18n-placeholder elements
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18n[currentLang] && i18n[currentLang][key]) {
+                    el.placeholder = i18n[currentLang][key];
+                }
+            });
+
+            // Update search placeholder
+            const searchInput = document.getElementById('hexagramSearchInput');
+            if (searchInput) {
+                searchInput.placeholder = t('searchHexagram');
+            }
+
+            // Re-render dynamic content
+            if (window.currentGuaData) {
+                renderResultView(window.currentGuaData);
+            }
+            const historySection = document.getElementById('history-section');
+            if (historySection && historySection.classList.contains('active')) {
+                loadHistory();
+            }
+        }
+
         // ========== 全局状态 ==========
         let currentView = 'home';
         let selectedMethod = 'coin';
@@ -2727,14 +3133,14 @@
             // 检查起卦次数限制
             if (!canDivine()) {
                 const remaining = getRemainingCount();
-                alert(`今日起卦次数已用完（每日${FREE_LIMITS.dailyDivination}次）\n\n获取完整版请访问官网: zetian.i-ching-ai.com | 微信小程序搜「易学轻松玩」`);
+                alert(t('alertDailyLimit').replace('{0}', FREE_LIMITS.dailyDivination));
                 return;
             }
             
             const questionInput = document.getElementById('questionInput').value.trim();
             
             if (!questionInput) {
-                alert('请先描述您想问的事情');
+                alert(t('alertInputQuestion'));
                 return;
             }
             
@@ -2749,7 +3155,7 @@
                 initDivinationView();
                 switchView('divination');
             } else {
-                alert('其他起卦方式正在开发中，敬请期待！');
+                alert(t('alertOtherMethods'));
             }
         }
         
@@ -2761,7 +3167,7 @@
             isAnimating = false;
             
             // 设置问题
-            document.getElementById('questionTextDisplay').textContent = question || '请诚心默念您的问题';
+            document.getElementById('questionTextDisplay').textContent = question || t('sincerelyChant');
             
             // 重置进度
             document.getElementById('currentYaoDisplay').textContent = '1';
@@ -2777,7 +3183,7 @@
             document.getElementById('completePanelContainer').classList.remove('show');
             document.getElementById('shakeBtnContainer').style.display = 'block';
             document.getElementById('hintTextDisplay').style.display = 'block';
-            document.getElementById('hintTextDisplay').textContent = '诚心默念问题后\n点击上方"摇卦"按钮';
+            document.getElementById('hintTextDisplay').innerHTML = t('hintText');
             document.getElementById('yaoHistoryContainer').style.display = 'none';
             document.getElementById('resultDisplayContainer').classList.remove('show');
         }
@@ -2915,7 +3321,7 @@
                 completeDivination();
             } else {
                 shakeBtn.disabled = false;
-                document.getElementById('hintTextDisplay').textContent = `继续摇第${currentYao}爻...`;
+                document.getElementById('hintTextDisplay').textContent = t('continueShake').replace('{0}', currentYao);
             }
             
             isAnimating = false;
@@ -2924,13 +3330,13 @@
         // ========== 判断爻象 ==========
         function interpretYao(backCount) {
             if (backCount === 3) {
-                return { value: 3, symbol: '○', text: '老阳（动爻）', isDong: true };
+                return { value: 3, symbol: '○', text: t('laoYang'), isDong: true };
             } else if (backCount === 0) {
-                return { value: 0, symbol: '×', text: '老阴（动爻）', isDong: true };
+                return { value: 0, symbol: '×', text: t('laoYin'), isDong: true };
             } else if (backCount === 1) {
-                return { value: 1, symbol: '—', text: '阳爻', isDong: false };
+                return { value: 1, symbol: '—', text: t('yangYao'), isDong: false };
             } else {
-                return { value: 2, symbol: '--', text: '阴爻', isDong: false };
+                return { value: 2, symbol: '--', text: t('yinYao'), isDong: false };
             }
         }
         
@@ -2959,7 +3365,7 @@
             
             document.getElementById('yaoHistoryContainer').style.display = 'block';
             
-            const positions = ['初爻', '二爻', '三爻', '四爻', '五爻', '上爻'];
+            const positions = isEn() ? ['1st', '2nd', '3rd', '4th', '5th', '6th'] : ['初爻', '二爻', '三爻', '四爻', '五爻', '上爻'];
             const yaoList = document.getElementById('yaoListContainer');
             
             yaoList.innerHTML = yaoResults.map((yao, i) => {
@@ -2986,8 +3392,8 @@
             
             const dongIndices = yaoResults.map((r, i) => r.isDong ? 6 - i : -1).filter(i => i > 0);
             document.getElementById('completeDongDisplay').textContent = dongIndices.length > 0 
-                ? `动爻：${dongIndices.join('、')}爻` 
-                : '无动爻';
+                ? t('dongYaoPrefix') + (isEn() ? dongIndices.join(', ') : dongIndices.join('、') + t('dongYaoSuffix'))
+                : t('noDongYao');
             
             document.getElementById('completePanelContainer').classList.add('show');
             document.getElementById('shakeBtnContainer').style.display = 'none';
@@ -3085,7 +3491,7 @@
                 renderResultView(window.currentGuaData);
                 switchView('result');
             } else {
-                alert('数据丢失，请重新起卦');
+                alert(t('alertDataLost'));
                 switchView('home');
             }
         }
@@ -3123,7 +3529,7 @@
                 document.getElementById('resultBianName').textContent = bianGua.name;
             } else {
                 document.getElementById('resultBianSymbol').textContent = '—';
-                document.getElementById('resultBianName').textContent = '无变卦';
+                document.getElementById('resultBianName').textContent = t('noBianGua');
             }
             
             // 渲染六爻排盘
@@ -3132,16 +3538,16 @@
             // 吉凶判断
             const judge = guaInfo.judge || '平';
             const badge = document.getElementById('resultBadgeDisplay');
-            badge.textContent = judge === '吉' ? '吉' : judge === '凶' ? '凶' : '平';
+            badge.textContent = judge === '吉' ? t('judgeGood') : judge === '凶' ? t('judgeBad') : t('judgeAverage');
             badge.className = `result-badge ${judge === '吉' ? 'result-good' : judge === '凶' ? 'result-bad' : 'result-average'}`;
             
             const titles = {
-                '吉': '卦象吉利，事事顺遂',
-                '凶': '卦象多艰，需谨慎行事',
-                '平': '卦象平常，稳中求进'
+                '吉': t('titleGood'),
+                '凶': t('titleBad'),
+                '平': t('titleAverage')
             };
-            document.getElementById('resultTitleText').textContent = titles[judge] || '卦象平和';
-            document.getElementById('resultDescText').textContent = guaInfo.desc || '此卦中正平和，适宜顺势而为';
+            document.getElementById('resultTitleText').textContent = titles[judge] || t('titleDefault');
+            document.getElementById('resultDescText').textContent = guaInfo.desc || t('defaultDesc');
             
             // 核心提示
             renderTipsResult(guaData);
@@ -3220,7 +3626,7 @@
             const container = document.getElementById('resultPaipanContainer');
             
             if (!guaData.yaoResults || guaData.yaoResults.length < 6) {
-                container.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">排盘数据加载失败</p>';
+                container.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">' + t('paipanLoadFailed') + '</p>';
                 return;
             }
             
@@ -3236,7 +3642,7 @@
             for (let i = 5; i >= 0; i--) {
                 const yao = guaData.yaoResults[i];
                 const isDong = dongIndices.includes(i);
-                const position = yaoPositions[i];
+                const position = isEn() ? ['1st','2nd','3rd','4th','5th','6th'][i] : yaoPositions[i];
                 
                 const tianganIndex = (5 - i + tiangan.indexOf(dayGan)) % 10;
                 const tg = tiangan[tianganIndex];
@@ -3282,8 +3688,8 @@
             
             container.innerHTML = html;
             
-            document.getElementById('resultShiYao').textContent = yaoPositions[5 - shiYao] + '爻';
-            document.getElementById('resultYingYao').textContent = yaoPositions[5 - yingYao] + '爻';
+            document.getElementById('resultShiYao').textContent = (isEn() ? ['1st','2nd','3rd','4th','5th','6th'][5 - shiYao] : yaoPositions[5 - shiYao]) + (isEn() ? '' : '爻');
+            document.getElementById('resultYingYao').textContent = (isEn() ? ['1st','2nd','3rd','4th','5th','6th'][5 - yingYao] : yaoPositions[5 - yingYao]) + (isEn() ? '' : '爻');
         }
         
         // ========== 计算世应位置 ==========
@@ -3298,25 +3704,30 @@
         // ========== 渲染提示 ==========
         function renderTipsResult(guaData) {
             const dongIndices = guaData.yaoResults.map((r, i) => r.isDong ? i : -1).filter(i => i >= 0);
-            const positions = ['初爻', '二爻', '三爻', '四爻', '五爻', '上爻'];
+            const positions = isEn() ? ['1st','2nd','3rd','4th','5th','6th'] : ['初爻', '二爻', '三爻', '四爻', '五爻', '上爻'];
             
-            let tip = `此卦为${guaData.guaName}，${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}`;
+            let tip = '';
+            if (isEn()) {
+                tip = `This hexagram is ${guaData.guaName}. ${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}`;
+            } else {
+                tip = `此卦为${guaData.guaName}，${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}`;
+            }
             
             if (dongIndices.length > 0) {
-                const dongNames = dongIndices.map(i => positions[5 - i]).join('、');
-                tip += ` 动爻在${dongNames}，需关注此方面的变化。`;
+                const dongNames = dongIndices.map(i => positions[5 - i]).join(isEn() ? ', ' : '、');
+                if (isEn()) {
+                    tip += ` ${t('tipDongYaoAt')}${dongNames}${t('tipNeedAttention')}`;
+                } else {
+                    tip += ` 动爻在${dongNames}，需关注此方面的变化。`;
+                }
                 
                 dongIndices.forEach(idx => {
                     const pos = positions[5 - idx];
-                    if (idx < 3) {
-                        tip += ` ${pos}代表内在因素，变化较多；`;
-                    } else {
-                        tip += ` ${pos}代表外在表现，需防变故；`;
-                    }
+                    tip += ` ${pos}${isEn() && idx < 3 ? t('tipDongYaoInner') : idx < 3 ? t('tipDongYaoInner') : t('tipDongYaoOuter')}`;
                 });
             }
             
-            tip += ' 建议：诚心做事，顺其自然。';
+            tip += t('tipAdvice');
             
             document.getElementById('resultTipsContent').textContent = tip;
         }
@@ -3330,27 +3741,27 @@
         function shareResult() {
             const guaData = window.currentGuaData;
             if (!guaData) {
-                alert('数据丢失');
+                alert(t('alertDataLost'));
                 return;
             }
             
-            const text = `【择天易数·六爻占卜】
+            const text = `${t('shareTitle')}
 
-问题：${guaData.question}
+${t('shareQuestion')}${guaData.question}
 
-本卦：${guaData.guaName} ${guaData.symbol}
+${t('shareBenGua')}${guaData.guaName} ${guaData.symbol}
 
-吉凶：${document.getElementById('resultBadgeDisplay').textContent}
+${t('shareJudge')}${document.getElementById('resultBadgeDisplay').textContent}
 
 ${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}
 
-—— 择天易数·六爻占卜`;
+${t('shareFooter')}`;
             
             if (navigator.share) {
                 navigator.share({ text });
             } else {
                 navigator.clipboard.writeText(text).then(() => {
-                    alert('已复制到剪贴板');
+                    alert(t('alertCopied'));
                 });
             }
         }
@@ -3369,8 +3780,8 @@ ${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}
                 historyList.innerHTML = `
                     <div class="empty-history">
                         <div class="icon">📜</div>
-                        <p>暂无占卜记录</p>
-                        <p style="font-size: 12px; margin-top: 5px;">开始您的第一次占卜吧</p>
+                        <p data-i18n="noHistory">暂无占卜记录</p>
+                        <p style="font-size: 12px; margin-top: 5px;" data-i18n="startFirstDivination">开始您的第一次占卜吧</p>
                     </div>
                 `;
                 return;
@@ -3414,9 +3825,9 @@ ${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}
                         </span>
                     </div>
                     <div class="gua-meaning">
-                        <p><strong>问事：</strong>${record.question}</p>
-                        <p style="margin-top: 10px;"><strong>日期：</strong>${date}</p>
-                        ${record.interpretation ? `<p style="margin-top: 10px;"><strong>简析：</strong>${record.interpretation}</p>` : ''}
+                        <p><strong>${t('questionLabel')}</strong>${record.question}</p>
+                        <p style="margin-top: 10px;"><strong>${t('dateLabel')}</strong>${date}</p>
+                        ${record.interpretation ? `<p style="margin-top: 10px;"><strong>${t('analysisLabel')}</strong>${record.interpretation}</p>` : ''}
                     </div>
                 </div>
             `;
@@ -3654,20 +4065,20 @@ ${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}
                 </div>
                 <div style="display: flex; gap: 15px; margin-bottom: 20px;">
                     <div style="flex: 1; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center;">
-                        <div style="font-size: 12px; color: #666;">卦性</div>
+                        <div style="font-size: 12px; color: #666;">${t('guaXing')}</div>
                         <div style="font-size: 16px; color: var(--text-gold); margin-top: 5px;">${data.nature}</div>
                     </div>
                     <div style="flex: 1; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center;">
-                        <div style="font-size: 12px; color: #666;">五行</div>
+                        <div style="font-size: 12px; color: #666;">${t('wuXing')}</div>
                         <div style="font-size: 16px; color: var(--text-gold); margin-top: 5px;">${data.wuxing}</div>
                     </div>
                     <div style="flex: 1; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center;">
-                        <div style="font-size: 12px; color: #666;">吉凶</div>
+                        <div style="font-size: 12px; color: #666;">${t('jiXiong')}</div>
                         <div style="font-size: 16px; margin-top: 5px;" class="history-result ${judgeClass}">${data.judge}</div>
                     </div>
                 </div>
                 <div style="background: rgba(201,169,98,0.1); padding: 15px; border-radius: 12px; border-left: 3px solid var(--primary-gold);">
-                    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">卦象解读</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">${t('guaXiangJieDu')}</div>
                     <div style="font-size: 14px; color: var(--text-gold); line-height: 1.8;">${data.desc}</div>
                 </div>
             `;
@@ -3692,17 +4103,19 @@ ${sixtyFourGua[`${guaData.upperGua}_${guaData.lowerGua}`]?.desc || ''}
             // 默认选中金钱卦
             selectedMethod = 'coin';
             currentView = 'home';
+            // 初始化语言
+            applyLanguage();
         });
     </script>
     <!-- 获取完整版弹窗 -->
     <div id="upgradeModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('show')">
         <div class="modal-content" style="max-width:340px;text-align:center;">
             <div class="modal-header">
-                <h2>🚀 获取完整版</h2>
+                <h2 data-i18n="upgradeTitle">🚀 获取完整版</h2>
                 <button class="modal-close" onclick="document.getElementById('upgradeModal').classList.remove('show')">×</button>
             </div>
             <div class="modal-body" style="padding:20px;">
-                <p style="font-size:14px;color:#ccc;margin-bottom:15px;">深度解读 · 场景化分析 · 专业报告<br>更多功能等你探索</p>
+                <p style="font-size:14px;color:#ccc;margin-bottom:15px;"><span data-i18n="upgradeDesc">深度解读 · 场景化分析 · 专业报告<br>更多功能等你探索</span></p>
                 <div style="margin-bottom:12px;">
                     <a href="https://github.com/zettian/yi" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#7b1fa2,#9c27b0);color:#fff;border:none;padding:12px 30px;border-radius:25px;font-size:15px;font-weight:bold;text-decoration:none;letter-spacing:2px;">前往 GitHub →</a>
                 </div>
